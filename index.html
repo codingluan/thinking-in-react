@@ -11,6 +11,29 @@
 
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        #root {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .styled-div {
+            border: thin solid #dddddd;
+            padding: 10px 15px;
+        }
+
+        .styled-table {
+            text-align: left;
+        }
+
+        .styled-table td {
+            width: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,8 +42,9 @@
         class FilterableProductTable extends React.Component {
             render() {
                 return (
-                    <>
-                    </>
+                    <div className='styled-div'>
+                        <h1>hello</h1>
+                    </div>
                 )
             }
         }
