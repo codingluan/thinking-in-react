@@ -49,6 +49,42 @@
             }
         }
 
+        class ProductTable extends React.Component {
+            render() {
+                const allCategoryValues = PRODUCTS.map(product => product.category);
+                const categories = allCategoryValues.filter((item, index) => allCategoryValues.indexOf(item) === index);
+
+                let tbody = [];
+
+                categories.map(category => {
+                    const categoryRowComponent = <ProductCategoryRow key={tbody.length} category={category} />;
+                    tbody.push(categoryRowComponent)
+
+                    PRODUCTS.forEach(product => {
+                        const findWord = product.category.includes(category);
+                        if (findWord) {
+                            const productRowComponent = <ProductRow key={tbody.length} product={product} />;
+                            return tbody.push(productRowComponent);
+                        }
+                    })
+                });
+
+                return (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tbody}
+                        </tbody>
+                    </table>
+                );
+            }
+        }
+
         class FilterableProductTable extends React.Component {
             render() {
                 return (
