@@ -76,10 +76,26 @@
             }
         }
 
+        class SearchBar extends React.Component {
+            render() {
+                return (
+                    <form>
+                        <input type='text' placeholder='Search...' />
+                        <p>
+                            <input type='checkbox' />
+                            {' '}
+                            <span>Only show products in stock</span>
+                        </p>
+                    </form>
+                );
+            }
+        }
+
         class FilterableProductTable extends React.Component {
             render() {
                 return (
                     <>
+                        <SearchBar />
                         <ProductTable products={this.props.products} />
                     </>
                 )
