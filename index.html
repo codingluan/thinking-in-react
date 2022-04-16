@@ -51,7 +51,7 @@
 
         class ProductTable extends React.Component {
             render() {
-                const allCategoryValues = PRODUCTS.map(product => product.category);
+                const allCategoryValues = this.props.products.map(product => product.category);
                 const categories = allCategoryValues.filter((item, index) => allCategoryValues.indexOf(item) === index);
 
                 let tbody = [];
@@ -60,7 +60,7 @@
                     const categoryRowComponent = <ProductCategoryRow key={tbody.length} category={category} />;
                     tbody.push(categoryRowComponent)
 
-                    PRODUCTS.forEach(product => {
+                    this.props.products.forEach(product => {
                         const findWord = product.category.includes(category);
                         if (findWord) {
                             const productRowComponent = <ProductRow key={tbody.length} product={product} />;
@@ -89,6 +89,7 @@
             render() {
                 return (
                     <>
+                        <ProductTable products={this.props.products} />
                     </>
                 )
             }
@@ -96,7 +97,7 @@
 
         const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
-        root.render(<FilterableProductTable />);
+        root.render(<FilterableProductTable products={PRODUCTS} />);
     </script>
 </body>
 
