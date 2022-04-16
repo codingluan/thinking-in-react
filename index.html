@@ -16,6 +16,17 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
+        class ProductCategoryRow extends React.Component {
+            render() {
+                const category = this.props.category;
+                return (
+                    <tr>
+                        <th colSpan="2">{category}</th>
+                    </tr>
+                );
+            }
+        }
+
         class FilterableProductTable extends React.Component {
             render() {
                 return (
