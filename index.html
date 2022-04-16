@@ -16,6 +16,15 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
+        const PRODUCTS = [
+            { category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football", id: 0 },
+            { category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball", id: 1 },
+            { category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball", id: 2 },
+            { category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch", id: 3 },
+            { category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5", id: 4 },
+            { category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7", id: 5 }
+        ];
+
         class ProductCategoryRow extends React.Component {
             render() {
                 const category = this.props.category;
@@ -42,22 +51,15 @@
 
         class ProductTable extends React.Component {
             render() {
-                const allCategoryValues = this.props.products.map(product => product.category);
-                const categories = allCategoryValues.filter((item, index) => allCategoryValues.indexOf(item) === index);
+                const rows = [];
+                let lastCategory = null;
 
-                let tbody = [];
-
-                categories.map(category => {
-                    const categoryRowComponent = <ProductCategoryRow key={tbody.length} category={category} />;
-                    tbody.push(categoryRowComponent)
-
-                    this.props.products.forEach(product => {
-                        const findWord = product.category.includes(category);
-                        if (findWord) {
-                            const productRowComponent = <ProductRow key={tbody.length} product={product} />;
-                            return tbody.push(productRowComponent);
-                        }
-                    })
+                this.props.products.forEach(product => {
+                    if (product.category != lastCategory) {
+                        rows.push(<ProductCategoryRow key={product.category} category={product.category} />);
+                    }
+                    rows.push(<ProductRow key={product.name} product={product} />);
+                    lastCategory = product.category;
                 });
 
                 return (
@@ -68,9 +70,7 @@
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {tbody}
-                        </tbody>
+                        <tbody>{rows}</tbody>
                     </table>
                 );
             }
