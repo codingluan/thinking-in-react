@@ -112,16 +112,28 @@
         }
 
         class SearchBar extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+            }
+
+            handleFilterTextChange(e) {
+                const filterText = e.target.value;
+                this.props.onFilterTextChange(filterText);
+            }
+
             render() {
                 const filterText = this.props.filterText;
                 const onStockOnly = this.props.inStockOnly;
-
                 return (
                     <form>
                         <input
                             type='text'
                             placeholder='Search...'
                             value={filterText}
+
+                            onChange={this.handleFilterTextChange}
                         />
                         <p>
                             <input
@@ -140,6 +152,12 @@
             constructor(props) {
                 super(props);
                 this.state = { filterText: '', inStockOnly: false };
+
+                this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+            }
+
+            handleFilterTextChange(filterText) {
+                this.setState({ filterText: filterText });
             }
 
             render() {
@@ -148,6 +166,7 @@
                         <SearchBar
                             filterText={this.state.filterText}
                             inStockOnly={this.state.inStockOnly}
+                            onFilterTextChange={this.handleFilterTextChange}
                         />
                         <ProductTable
                             products={this.props.products}
