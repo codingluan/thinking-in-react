@@ -81,6 +81,10 @@
                 let lastCategory = null;
 
                 this.props.products.forEach(product => {
+                    if (product.name.indexOf(filterText) === -1) {
+                        return;
+                    }
+
                     if (product.category != lastCategory) {
                         rows.push(<ProductCategoryRow key={product.category} category={product.category} />);
                     }
@@ -130,7 +134,7 @@
         class FilterableProductTable extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { filterText: '', inStockOnly: false };
+                this.state = { filterText: 'o', inStockOnly: false };
             }
 
             render() {
