@@ -86,7 +86,6 @@
                     }
 
                     if (inStockOnly && !product.stocked) {
-                        console.log('filter out');
                         return;
                     }
 
@@ -116,11 +115,17 @@
                 super(props);
 
                 this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+                this.handleInStockChange = this.handleInStockChange.bind(this);
             }
 
             handleFilterTextChange(e) {
                 const filterText = e.target.value;
                 this.props.onFilterTextChange(filterText);
+            }
+
+            handleInStockChange(e) {
+                const inStockOnly = e.target.checked;
+                this.props.onInStockChange(inStockOnly);
             }
 
             render() {
@@ -132,13 +137,13 @@
                             type='text'
                             placeholder='Search...'
                             value={filterText}
-
                             onChange={this.handleFilterTextChange}
                         />
                         <p>
                             <input
                                 type='checkbox'
                                 checked={onStockOnly}
+                                onChange={this.handleInStockChange}
                             />
                             {' '}
                             <span>Only show products in stock</span>
@@ -154,10 +159,15 @@
                 this.state = { filterText: '', inStockOnly: false };
 
                 this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+                this.handleInStockChange = this.handleInStockChange.bind(this);
             }
 
             handleFilterTextChange(filterText) {
                 this.setState({ filterText: filterText });
+            }
+
+            handleInStockChange(inStockOnly) {
+                this.setState({ inStockOnly: inStockOnly });
             }
 
             render() {
@@ -167,6 +177,7 @@
                             filterText={this.state.filterText}
                             inStockOnly={this.state.inStockOnly}
                             onFilterTextChange={this.handleFilterTextChange}
+                            onInStockChange={this.handleInStockChange}
                         />
                         <ProductTable
                             products={this.props.products}
