@@ -50,6 +50,31 @@
             { category: "Electronics", price: "$29.99", stocked: false, name: "Macbook 2022", id: 7 },
         ];
 
+        const sortingProductsByCategory = (data) => {
+            // Collect all available categories of the data model
+            const redundantCategory = data.map(product => product.category);
+
+            // Remove duplicate to collect unique categories only
+            const categories = redundantCategory.filter(
+                (item, index) => redundantCategory.indexOf(item) === index
+            );
+
+            // Create a new products array to store products ordered (more accuratly is *grouped*) by category
+            let sortedProducts = [];
+
+            // Push products getting from the data model to the new array (above) grouped by category
+            categories.forEach(category => {
+                data.map(product => {
+                    if (product.category !== category) {
+                        return;
+                    }
+                    sortedProducts.push(product);
+                })
+            });
+
+            return sortedProducts;
+        }
+
         class ProductCategoryRow extends React.Component {
             render() {
                 const category = this.props.category;
