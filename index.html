@@ -171,6 +171,12 @@
                 this.setState({ inStockOnly: inStockOnly });
             }
 
+            componentDidMount() {
+                fetch(PRODUCTS_API_URL)
+                    .then(response => response.json())
+                    .then(products => this.setState({ products: products }));
+            }
+
             render() {
                 return (
                     <div className='styled-div'>
