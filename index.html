@@ -156,7 +156,7 @@
         class FilterableProductTable extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { filterText: '', inStockOnly: false };
+                this.state = { filterText: '', inStockOnly: false, products: [] };
 
                 this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
                 this.handleInStockChange = this.handleInStockChange.bind(this);
