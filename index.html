@@ -172,23 +172,17 @@
         }
 
         class FilterableProductTable extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = { filterText: '', inStockOnly: false, products: [] };
+            state = { filterText: '', inStockOnly: false, products: [] };
 
-                this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-                this.handleInStockChange = this.handleInStockChange.bind(this);
-            }
-
-            handleFilterTextChange(filterText) {
+            handleFilterTextChange = (filterText) => {
                 this.setState({ filterText: filterText });
             }
 
-            handleInStockChange(inStockOnly) {
+            handleInStockChange = (inStockOnly) => {
                 this.setState({ inStockOnly: inStockOnly });
             }
 
-            componentDidMount() {
+            componentDidMount = () => {
                 fetch(PRODUCTS_API_URL)
                     .then(response => response.json())
                     .then(products => {
