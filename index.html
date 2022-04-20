@@ -129,19 +129,12 @@
         }
 
         class SearchBar extends React.Component {
-            constructor(props) {
-                super(props);
-
-                this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-                this.handleInStockChange = this.handleInStockChange.bind(this);
-            }
-
-            handleFilterTextChange(e) {
+            handleFilterTextChange = (e) => {
                 const filterText = e.target.value;
                 this.props.onFilterTextChange(filterText);
             }
 
-            handleInStockChange(e) {
+            handleInStockChange = (e) => {
                 const inStockOnly = e.target.checked;
                 this.props.onInStockChange(inStockOnly);
             }
